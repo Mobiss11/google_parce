@@ -6,15 +6,17 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
-from credentials import credentials, table, sheet
+from credentials import credentials, table, sheet1, settingsSheet
 from consts import *
 
 connect_json = gspread.service_account_from_dict(credentials)
 
 sheet_google = connect_json.open_by_url(table)
-list_sheet = sheet_google.worksheet(sheet)
+list_sheet = sheet_google.worksheet(sheet1)
+settingsSheet = sheet_google.worksheet(settingsSheet)
 
-options = webdriver.ChromeOptions()
+# Получаем опции для браузера хром - режимы работы
+options = webdriver.ChromeOptions() 
 #options.add_argument(OPTION_1)
 options.add_argument(OPTION_2)
 options.add_argument(OPTION_3)
@@ -32,22 +34,39 @@ num_names2 = num_names + 1
 while True:
 
     for row in range(2, num_names2):
-
+        
         values_list = list_sheet.row_values(row)
 
-        name = values_list[1]
-        famila = values_list[2]
-        usluga = values_list[3]
-        region = values_list[6]
-        pasport = values_list[7]
-        nie = values_list[8]
-        date = values_list[9]
-        country = values_list[10]
-        telefone = values_list[14]
-        email = values_list[15]
-        time_z = int(list_sheet.acell(f'Q2').value)
+        name = values_list[0]
+        famila = values_list[1]
+        usluga = values_list[2]
+        region = values_list[5]
+        pasport = values_list[6]
+        nie = values_list[7]
+        date = values_list[8]
+        country = values_list[9]
+        telefone = values_list[13]
+        email = values_list[14]
+        numberOfTries = values_list[15]
 
-        if usluga == MAIN_USL_1:
+        settings_list = settingsSheet.col_values(2)
+        time_z = settings_list[1]
+        pauseAfterFinishingList = settings_list[2]
+        pauseTooManyRequests = settings_list[3]
+        pauseMinA = settings_list[4]
+        pauseMaxA = settings_list[5]
+        pauseMinB = settings_list[6]
+        pauseMaxB = settings_list[7]
+        """
+        Пауза между записями
+        Пауза после того, как закончили весь список
+        Пауза в случае выпадения Too Many Requests
+        Пауза между операциями по обновлению страницы с запросом тип А (нет ввода текста - только выпадающие списки (сек) - МИН
+        Пауза между операциями по обновлению страницы с запросом тип А (нет ввода текста - только выпадающие списки (сек) - МАКС
+        Пауза между операциями по обновлению страницы с запросом тип Б (есть формы с текстом - почта, условия и пр.) (сек) - МИН
+        Пауза между операциями по обновлению страницы с запросом тип Б (есть формы с текстом - почта, условия и пр.) (сек) - МАКС
+        """
+        if usluga == AsignacionNIE: 
 
             driver.get(MAIN_URL)
             driver.implicitly_wait(80)
@@ -155,7 +174,7 @@ while True:
             except:
                 print('офисов не найдено')
                 time.sleep(time_z)
-        elif usluga == MAIN_USL_2:
+        elif usluga == TomaHuellas: 
 
             driver.get(MAIN_URL)
             driver.implicitly_wait(80)
@@ -266,7 +285,7 @@ while True:
             except:
                 print('офисов не найдено')
                 time.sleep(time_z)
-        elif usluga == MAIN_USL_3:
+        elif usluga == CertificadoUE: 
 
             driver.get(MAIN_URL)
             driver.implicitly_wait(80)
@@ -378,7 +397,7 @@ while True:
             except:
                 print('офисов не найдено')
                 time.sleep(time_z)
-        elif usluga == MAIN_USL_4:
+        elif usluga == TarjetaUkranea:
 
             driver.get(MAIN_URL)
             driver.implicitly_wait(80)

@@ -13,4 +13,5 @@ credentials = {
 }
 
 table = 'https://docs.google.com/spreadsheets/d/1AtPt5AKSVImuELIsSc0fuQSd20oR7Dn7qGCUBvwFNfs/edit#gid=0'
-sheet = 'Заказы'
+sheet1 = 'Управление Роботом1'
+settingsSheet = "REF"
