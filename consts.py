@@ -19,8 +19,8 @@ IPblockSoundDuration = 500
 
 #URL settings
 MAIN_URL = 'https://icp.administracionelectronica.gob.es/icpco/index'
-MAIN_PATH_BUTTON = '/html/body/div[1]/div/main/div/div/section/div[2]/div[3]/input[1]'
-MAIN_SELECT = '/html/body/div[1]/div/main/div/div/section/div[2]/form/div[1]/select'
+MAIN_PATH_BUTTON = 'btnAceptar'
+MAIN_SELECT = 'form'
 
 # Block_1
 AsignacionNIE = 'Asignación de N.I.E.'

@@ -15,9 +15,7 @@ sheet_google = connect_json.open_by_url(table)
 list_sheet = sheet_google.worksheet(sheet1)
 settingsSheet = sheet_google.worksheet(settingsSheet)
 
-# Получаем опции для браузера хром - режимы работы
-options = webdriver.ChromeOptions() 
-#options.add_argument(OPTION_1)
+options = webdriver.ChromeOptions()
 options.add_argument(OPTION_2)
 options.add_argument(OPTION_3)
 options.add_argument(OPTION_4)
@@ -36,6 +34,7 @@ while True:
     for row in range(2, num_names2):
         
         values_list = list_sheet.row_values(row)
+        settings_list = settingsSheet.col_values(2)
 
         name = values_list[0]
         famila = values_list[1]
@@ -49,36 +48,28 @@ while True:
         email = values_list[14]
         numberOfTries = values_list[15]
 
-        settings_list = settingsSheet.col_values(2)
-        time_z = settings_list[1]
+        time_z = int(settings_list[1])
         pauseAfterFinishingList = settings_list[2]
         pauseTooManyRequests = settings_list[3]
         pauseMinA = settings_list[4]
         pauseMaxA = settings_list[5]
         pauseMinB = settings_list[6]
         pauseMaxB = settings_list[7]
-        """
-        Пауза между записями
-        Пауза после того, как закончили весь список
-        Пауза в случае выпадения Too Many Requests
-        Пауза между операциями по обновлению страницы с запросом тип А (нет ввода текста - только выпадающие списки (сек) - МИН
-        Пауза между операциями по обновлению страницы с запросом тип А (нет ввода текста - только выпадающие списки (сек) - МАКС
-        Пауза между операциями по обновлению страницы с запросом тип Б (есть формы с текстом - почта, условия и пр.) (сек) - МИН
-        Пауза между операциями по обновлению страницы с запросом тип Б (есть формы с текстом - почта, условия и пр.) (сек) - МАКС
-        """
-        if usluga == AsignacionNIE: 
+
+        if usluga == AsignacionNIE:
 
             driver.get(MAIN_URL)
             driver.implicitly_wait(80)
 
-            select_element1 = driver.find_element(By.ID,'form')
-            select_object1 = Select(select_element1)
-            select_object1.select_by_visible_text(region)
+            select_input_region = driver.find_element(By.ID, MAIN_SELECT)
+            select_region = Select(select_input_region)
+            select_region.select_by_visible_text(region)
+            time.sleep(5)
 
-            driver.find_element(By.ID, 'btnAceptar').click()
-            driver.implicitly_wait(80)
+            driver.find_element(By.ID, MAIN_PATH_BUTTON).click()
+            driver.implicitly_wait(10)
 
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(8)
 
             select_element2 = driver.find_element(By.XPATH,
                                                   '/html/body/div[1]/div[2]/main/div/div/section/div[2]/form[1]/div[3]/div[1]/div[2]/div/fieldset/div[2]/select')
@@ -178,20 +169,16 @@ while True:
 
             driver.get(MAIN_URL)
             driver.implicitly_wait(80)
+
+            select_input_region = driver.find_element(By.ID, MAIN_SELECT)
+            select_region = Select(select_input_region)
+            select_region.select_by_visible_text(region)
             time.sleep(5)
 
-            select_element1 = driver.find_element(By.ID, 'form')
-            select_object1 = Select(select_element1)
-            select_object1.select_by_visible_text(region)
-
-            time.sleep(12)
-
-            driver.find_element(By.ID, 'btnAceptar').click()
+            driver.find_element(By.ID, MAIN_PATH_BUTTON).click()
             driver.implicitly_wait(10)
 
-            time.sleep(6)
-
-            #driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(8)
 
             select_element2 = driver.find_element(By.ID, 'tramiteGrupo[1]')
             select_object2 = Select(select_element2)
@@ -202,7 +189,6 @@ while True:
             driver.implicitly_wait(80)
             time.sleep(12)
 
-            #driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
             driver.find_element(By.ID, 'btnEntrar').submit()
             driver.implicitly_wait(80)
@@ -285,19 +271,20 @@ while True:
             except:
                 print('офисов не найдено')
                 time.sleep(time_z)
-        elif usluga == CertificadoUE: 
+        elif usluga == CertificadoUE:
 
             driver.get(MAIN_URL)
             driver.implicitly_wait(80)
 
-            select_element1 = driver.find_element(By.ID, 'form')
-            select_object1 = Select(select_element1)
-            select_object1.select_by_visible_text(region)
+            select_input_region = driver.find_element(By.ID, MAIN_SELECT)
+            select_region = Select(select_input_region)
+            select_region.select_by_visible_text(region)
+            time.sleep(5)
 
-            driver.find_element(By.ID, 'btnAceptar').click()
-            driver.implicitly_wait(80)
+            driver.find_element(By.ID, MAIN_PATH_BUTTON).click()
+            driver.implicitly_wait(10)
 
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(8)
 
             select_element2 = driver.find_element(By.XPATH,
                                                   '/html/body/div[1]/div[2]/main/div/div/section/div[2]/form[1]/div[3]/div[1]/div[2]/div/fieldset/div[2]/select')
@@ -402,14 +389,15 @@ while True:
             driver.get(MAIN_URL)
             driver.implicitly_wait(80)
 
-            select_element1 = driver.find_element(By.ID, 'form')
-            select_object1 = Select(select_element1)
-            select_object1.select_by_visible_text(region)
+            select_input_region = driver.find_element(By.ID, MAIN_SELECT)
+            select_region = Select(select_input_region)
+            select_region.select_by_visible_text(region)
+            time.sleep(5)
 
-            driver.find_element(By.ID, 'btnAceptar').click()
-            driver.implicitly_wait(80)
+            driver.find_element(By.ID, MAIN_PATH_BUTTON).click()
+            driver.implicitly_wait(10)
 
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(8)
 
             select_element2 = driver.find_element(By.XPATH,
                                                   '/html/body/div[1]/div[2]/main/div/div/section/div[2]/form[1]/div[3]/div[1]/div[2]/div/fieldset/div[2]/select')
