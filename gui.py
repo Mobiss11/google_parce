@@ -40,9 +40,9 @@ def display():
 
     def stop():
 
-        driver.quit()
         status_sheet.update(f'B{str(row)}', f'{STATUS_FREE}')
-        sys.exit(0)
+        driver.quit()
+        sys.exit()
 
     tk.Button(root,
               text=BUTTON_TEXT_STOP,

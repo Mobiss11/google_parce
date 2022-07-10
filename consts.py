@@ -1,7 +1,6 @@
 
 # System
 
-# OPTION_1 = 'window-size=1920,1080'
 OPTION_1 = "--disable-dev-shm-usage"
 OPTION_2 = "--no-sandbox"
 OPTION_3 = "--incognito"
@@ -12,6 +11,7 @@ STATUS_WORK = 'Working'
 TEXT_LOGS_1 = "Cитов не найдено"
 TEXT_LOGS_2 = "Офисов не найдено"
 TEXT_LOGS_3 = "Сита есть"
+FORMAT_TIME = "%d-%m-%Y %H:%M"
 
 SCROLL_PAUSE_TIME = 0.2
 
@@ -19,26 +19,47 @@ SCROLL_PAUSE_TIME = 0.2
 FREQUENCY = 2500
 DURATION = 1000
 
-# Ip block sound settings
-IPblockSoundFreq = 1500
-IPblockSoundDuration = 500
-
 # URL settings
 MAIN_URL = 'https://icp.administracionelectronica.gob.es/icpco/index'
 MAIN_PATH_BUTTON = 'btnAceptar'
 MAIN_SELECT = 'form'
+ID_INPUT_USLUGA = 'tramiteGrupo[1]'
+ID_BUTTON_ACEPTAR = 'btnAceptar'
+ID_BUTTON_ENTRAR = 'btnEntrar'
+ID_BUTTON_ENVIAR = 'btnEnviar'
 
 # Block_1
 AsignacionNIE = 'Asignación de N.I.E.'
+ID_INPUT_PASPORT_NIE = 'txtIdCitado'
+ID_INPUT_NOMBRE_NIE = 'txtDesCitado'
+ID_INPUT_DATE_NIE = 'txtAnnoCitado'
+ID_INPUT_COUNTRY_NIE = 'txtPaisNac'
 
 # Block_2
 TomaHuellas = 'POLICIA-TOMA DE HUELLA (EXPEDICIÓN DE TARJETA), RENOVACIÓN DE TARJETA DE LARGA DURACIÓN Y DUPLICADO'
+ID_INPUT_NIE_TOMA = 'txtIdCitado'
+ID_INPUT_NOMBRE_FAMILAR_TOMA = 'txtDesCitado'
+ID_INPUT_COUNTRY_TOMA = 'txtPaisNac'
 
 # Block_3
 CertificadoUE = 'POLICIA-CERTIFICADO DE REGISTRO DE CIUDADANO DE LA U.E.'
+ID_INPUT_NIE_CERT = 'txtIdCitado'
+ID_INPUT_NOMBRE_CERT = 'txtDesCitado'
 
 # Block_4
 TarjetaUkranea = 'POLICÍA TARJETA CONFLICTO UCRANIA–ПОЛІЦІЯ -КАРТКА ДЛЯ ПЕРЕМІЩЕНИХ ОСІБ ВНАСЛІДОК КОНФЛІКТУ В УКРАЇНІ'
+
+# Block_office
+LABEL_OFFICE = '/html/body/div[1]/div/main/div/div/section/div[2]/form/div[1]/fieldset/div/label'
+ID_INPUT_OFFICE = '/html/body/div[1]/div/main/div/div/section/div[2]/form/div[1]/fieldset/div/select'
+ID_BUTTON_OFFICE = '/html/body/div[1]/div/main/div/div/section/div[2]/form/div[2]/input[1]'
+ID_INPUT_TELEFONE = '/html/body/div[1]/div/main/div/div/section/div[2]/form/div[1]/div/fieldset[2]/div[1]/input[2]'
+ID_INPUT_EMAIL = '/html/body/div[1]/div/main/div/div/section/div[2]/form/div[1]/div/fieldset[2]/div[2]/div/div[1]/inp' \
+                 'ut[2]'
+ID_INPUT_EMAIL_DOUBLE = '/html/body/div[1]/div/main/div/div/section/div[2]/form/div[1]/div/fieldset[2]/div[2]/div/d' \
+                        'iv[2]/input'
+ID_BUTTON_SIGUIENTE = 'btnSiguiente'
+ID_CITA = 'cita_1'
 
 # gui
 ROOT_CONSTANT = "350x350-35+35"
