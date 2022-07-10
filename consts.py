@@ -10,7 +10,7 @@ STATUS_FREE = 'Standing by'
 STATUS_WORK = 'Working'
 TEXT_LOGS_1 = "Cитов не найдено"
 TEXT_LOGS_2 = "Офисов не найдено"
-TEXT_LOGS_3 = "Сита есть"
+TEXT_LOGS_3 = "Офис найден, перейдите к сите"
 FORMAT_TIME = "%d-%m-%Y %H:%M"
 
 SCROLL_PAUSE_TIME = 0.2
