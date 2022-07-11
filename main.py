@@ -95,9 +95,14 @@ def main_bot():
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
+                        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
                         # выбор офиса
                         try:
                             driver.find_element(By.XPATH, LABEL_OFFICE)
+
+                            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
                             select_element4 = driver.find_element(By.XPATH, ID_INPUT_OFFICE)
                             select_object4 = Select(select_element4)
                             try:
@@ -200,9 +205,14 @@ def main_bot():
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
+                        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
                         # выбор офиса
                         try:
                             driver.find_element(By.XPATH, LABEL_OFFICE)
+
+                            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
                             select_element4 = driver.find_element(By.XPATH, ID_INPUT_OFFICE)
                             select_object4 = Select(select_element4)
                             try:
@@ -299,9 +309,14 @@ def main_bot():
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
+                        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
                         # выбор офиса
                         try:
                             driver.find_element(By.XPATH, LABEL_OFFICE)
+
+                            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
                             select_element4 = driver.find_element(By.XPATH, ID_INPUT_OFFICE)
                             select_object4 = Select(select_element4)
                             try:
@@ -395,9 +410,14 @@ def main_bot():
                     driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                     driver.implicitly_wait(5)
 
+                    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
                     # выбор офиса
                     try:
                         driver.find_element(By.XPATH, LABEL_OFFICE)
+
+                        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
                         select_element4 = driver.find_element(By.XPATH, ID_INPUT_OFFICE)
                         select_object4 = Select(select_element4)
                         try:
