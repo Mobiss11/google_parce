@@ -50,9 +50,8 @@ def main_bot():
                         number_row = index_last_element + 2
 
                         time_now = datetime.now()
-                        current_time = time_now.strftime(FORMAT_TIME)
 
-                        logs_sheet.update(f'A{str(number_row)}', f'{current_time}')
+                        logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
                         driver.get(MAIN_URL)
                         driver.implicitly_wait(80)
@@ -156,9 +155,8 @@ def main_bot():
                         number_row = index_last_element + 2
 
                         time_now = datetime.now()
-                        current_time = time_now.strftime(FORMAT_TIME)
 
-                        logs_sheet.update(f'A{str(number_row)}', f'{current_time}')
+                        logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
                         driver.get(MAIN_URL)
                         driver.implicitly_wait(80)
@@ -262,9 +260,8 @@ def main_bot():
                         number_row = index_last_element + 2
 
                         time_now = datetime.now()
-                        current_time = time_now.strftime(FORMAT_TIME)
 
-                        logs_sheet.update(f'A{str(number_row)}', f'{current_time}')
+                        logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
                         driver.get(MAIN_URL)
                         driver.implicitly_wait(80)
@@ -359,9 +356,8 @@ def main_bot():
                     number_row = index_last_element + 2
 
                     time_now = datetime.now()
-                    current_time = time_now.strftime(FORMAT_TIME)
 
-                    logs_sheet.update(f'A{str(number_row)}', f'{current_time}')
+                    logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
                     driver.get(MAIN_URL)
                     driver.implicitly_wait(80)
@@ -455,9 +451,8 @@ def main_bot():
             number_row = index_last_element + 2
 
             time_now = datetime.now()
-            current_time = time_now.strftime(FORMAT_TIME)
 
-            logs_sheet.update(f'A{str(number_row)}', f'{current_time}')
+            logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
             time_finaly = datetime.now()
             current_time = time_finaly.strftime(FORMAT_TIME)
