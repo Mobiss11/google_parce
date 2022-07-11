@@ -9,7 +9,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from consts import *
-from work_sheets import robots_list, settings_list_sheet, num_rows_list, logs_sheet, name_robot_active
+from work_sheets import robots_list, settings_list_sheet, num_rows_list, logs_sheet, name_robot_active, status_sheet\
+    , row_for_stop
 from gui import stop_program
 from chrome import driver
 
@@ -483,6 +484,8 @@ def main_bot():
             logs_sheet.update(f'E{str(number_row)}', f'-')
             logs_sheet.update(f'F{str(number_row)}', f'-')
             logs_sheet.update(f'G{str(number_row)}', f'{problem}')
+
+            status_sheet.update(f'B{str(row_for_stop)}', f'{STATUS_FREE}')
 
             driver.quit()
             sys.exit(0)
