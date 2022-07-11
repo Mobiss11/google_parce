@@ -62,12 +62,4 @@ ID_BUTTON_SIGUIENTE = 'btnSiguiente'
 ID_CITA = 'cita_1'
 
 # gui
-ROOT_CONSTANT = "350x350-35+35"
-TITLE = 'Интерфейс'
-BUTTON_TEXT_STOP = 'Завершить'
-BUTTON_TEXT_START = 'Начать'
-FONT_COLOR = 'white'
-BG_COLOR_STOP = 'red'
-BG_COLOR_START = 'green'
-FONT = ("Arial", 9)
-ATTRIBUTE = "-topmost"
+COMMAND = 'Stop'

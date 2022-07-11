@@ -30,6 +30,7 @@ for num_row in range(2, nums_rows):
 
 list_active = tables_robot[0]
 row = rows[0]
+row_for_stop = row
 
 status_sheet.update(f'B{str(row)}', f'{STATUS_WORK}')
 

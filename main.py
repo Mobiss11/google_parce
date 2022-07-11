@@ -10,7 +10,7 @@ from selenium.webdriver.support.select import Select
 
 from consts import *
 from work_sheets import robots_list, settings_list_sheet, num_rows_list, logs_sheet, name_robot_active
-from gui import display
+from gui import stop_program
 from chrome import driver
 
 
@@ -124,45 +124,13 @@ def main_bot():
                             current_time = time_finaly.strftime(FORMAT_TIME)
 
                             logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_2}')
+                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
                             logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
                             logs_sheet.update(f'E{str(number_row)}', f'{name}')
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
                             time.sleep(900)
 
-                            driver.find_element(By.ID, ID_BUTTON_SIGUIENTE).click()
-                            driver.implicitly_wait(80)
-
-                            try:
-                                driver.find_element(By.ID, ID_CITA)
-
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                time_finaly = datetime.now()
-                                current_time = time_finaly.strftime(FORMAT_TIME)
-
-                                logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                                logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
-                                logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                                logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                                logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                                logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-                                time.sleep(900)
-                            except:
-                                time_finaly = datetime.now()
-                                current_time = time_finaly.strftime(FORMAT_TIME)
-
-                                logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                                logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_1}')
-                                logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                                logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                                logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                                logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
                         except:
                             time_finaly = datetime.now()
                             current_time = time_finaly.strftime(FORMAT_TIME)
@@ -269,39 +237,6 @@ def main_bot():
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
                             time.sleep(900)
 
-                            driver.find_element(By.ID, ID_BUTTON_SIGUIENTE).click()
-                            driver.implicitly_wait(80)
-
-                            try:
-                                driver.find_element(By.ID, ID_CITA)
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                time_finaly = datetime.now()
-                                current_time = time_finaly.strftime(FORMAT_TIME)
-
-                                logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                                logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
-                                logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                                logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                                logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                                logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-                                time.sleep(900)
-
-                            except:
-                                time_finaly = datetime.now()
-                                current_time = time_finaly.strftime(FORMAT_TIME)
-
-                                logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                                logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_1}')
-                                logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                                logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                                logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                                logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-
                         except:
                             time_finaly = datetime.now()
                             current_time = time_finaly.strftime(FORMAT_TIME)
@@ -402,39 +337,6 @@ def main_bot():
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
                             time.sleep(900)
 
-                            driver.find_element(By.ID, ID_BUTTON_SIGUIENTE).click()
-                            driver.implicitly_wait(80)
-
-                            try:
-                                driver.find_element(By.ID, ID_CITA)
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                winsound.Beep(FREQUENCY, DURATION)
-                                time.sleep(1)
-                                time_finaly = datetime.now()
-                                current_time = time_finaly.strftime(FORMAT_TIME)
-
-                                logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                                logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
-                                logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                                logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                                logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                                logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-                                time.sleep(900)
-
-                            except:
-                                time_finaly = datetime.now()
-                                current_time = time_finaly.strftime(FORMAT_TIME)
-
-                                logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                                logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_1}')
-                                logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                                logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                                logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                                logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-
                         except:
                             time_finaly = datetime.now()
                             current_time = time_finaly.strftime(FORMAT_TIME)
@@ -532,40 +434,6 @@ def main_bot():
                         logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
                         time.sleep(900)
 
-                        driver.find_element(By.ID, ID_BUTTON_SIGUIENTE).click()
-                        driver.implicitly_wait(80)
-
-
-                        try:
-                            driver.find_element(By.ID, ID_CITA)
-                            winsound.Beep(FREQUENCY, DURATION)
-                            time.sleep(1)
-                            winsound.Beep(FREQUENCY, DURATION)
-                            time.sleep(1)
-                            winsound.Beep(FREQUENCY, DURATION)
-                            time.sleep(1)
-                            time_finaly = datetime.now()
-                            current_time = time_finaly.strftime(FORMAT_TIME)
-
-                            logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
-                            logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                            logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                            logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                            logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-                            time.sleep(900)
-
-                        except:
-                            time_finaly = datetime.now()
-                            current_time = time_finaly.strftime(FORMAT_TIME)
-
-                            logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_1}')
-                            logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                            logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                            logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                            logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-
                     except:
                         time_finaly = datetime.now()
                         current_time = time_finaly.strftime(FORMAT_TIME)
@@ -606,7 +474,7 @@ def main_bot():
 
 
 if __name__ == '__main__':
-    Thread(target=display).start()
+    Thread(target=stop_program).start()
     Thread(target=main_bot).start()
 
 
