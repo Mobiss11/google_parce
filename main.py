@@ -230,7 +230,7 @@ def main_bot():
                             current_time = time_finaly.strftime(FORMAT_TIME)
 
                             logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_2}')
+                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
                             logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
                             logs_sheet.update(f'E{str(number_row)}', f'{name}')
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
@@ -330,7 +330,7 @@ def main_bot():
                             current_time = time_finaly.strftime(FORMAT_TIME)
 
                             logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_2}')
+                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
                             logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
                             logs_sheet.update(f'E{str(number_row)}', f'{name}')
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
@@ -427,7 +427,7 @@ def main_bot():
                         current_time = time_finaly.strftime(FORMAT_TIME)
 
                         logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                        logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_2}')
+                        logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
                         logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
                         logs_sheet.update(f'E{str(number_row)}', f'{name}')
                         logs_sheet.update(f'F{str(number_row)}', f'{famila}')
