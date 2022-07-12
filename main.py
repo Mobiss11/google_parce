@@ -3,14 +3,14 @@ import time
 import winsound
 from threading import Thread
 import random
-import sys
+import socket
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from consts import *
 from work_sheets import robots_list, settings_list_sheet, num_rows_list, logs_sheet, name_robot_active, status_sheet\
-    , row_for_stop
+    , row_for_stop, email_manager, phone_manager
 from gui import stop_program
 from chrome import driver
 
@@ -32,18 +32,23 @@ def main_bot():
                 nie = values_list[7]
                 date = values_list[8]
                 country = values_list[9]
-                telefone = values_list[13]
-                email = values_list[14]
+                telefone = phone_manager
+                email = email_manager
                 number_of_tries = values_list[15]
 
                 time_z = int(settings_list[1])
                 time_min = int(settings_list[3])
                 time_max = int(settings_list[4])
 
+                name_pk = socket.gethostname()
+                ip = socket.gethostbyname(socket.gethostname())
+
                 if usluga == AsignacionNIE:
 
                     attempt = 1
                     while attempt <= int(number_of_tries):
+
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
 
                         logs_col = logs_sheet.col_values(1)
                         last_element = logs_col[-1]
@@ -68,14 +73,23 @@ def main_bot():
                         select_input_usluga = driver.find_element(By.ID, ID_INPUT_USLUGA)
                         select_usluga = Select(select_input_usluga)
                         select_usluga.select_by_visible_text(str(usluga))
-                        time.sleep(random.randint(time_min, time_max))
+
+                        sec_first = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_first}')
+                        time.sleep(sec_first)
 
                         driver.find_element(By.ID, ID_BUTTON_ACEPTAR).click()
                         driver.implicitly_wait(80)
-                        time.sleep(random.randint(time_min, time_max))
+
+                        sec_second = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_second}')
+                        time.sleep(sec_second)
 
                         driver.find_element(By.ID, ID_BUTTON_ENTRAR).submit()
                         driver.implicitly_wait(80)
+
+                        sec_third = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WRITE} {name} {famila}')
 
                         driver.find_element(By.ID, ID_INPUT_PASPORT_NIE).send_keys(pasport)
 
@@ -87,12 +101,15 @@ def main_bot():
                         select_object3 = Select(select_element3)
                         select_object3.select_by_visible_text(country)
 
-                        time.sleep(random.randint(time_min, time_max))
+                        time.sleep(sec_third)
 
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
-                        time.sleep(random.randint(time_min, time_max))
+                        sec_fourth = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_fourth}')
+                        time.sleep(sec_fourth)
+
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
@@ -134,7 +151,11 @@ def main_bot():
                             logs_sheet.update(f'E{str(number_row)}', f'{name}')
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-                            time.sleep(900)
+
+                            sec_fivth = 900
+                            status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING_USER} {sec_fivth}')
+
+                            time.sleep(sec_fivth)
 
                         except:
                             time_finaly = datetime.now()
@@ -147,6 +168,8 @@ def main_bot():
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
 
+                            status_sheet.update(f'B{str(row)}', f'{STATUS_NO_OFFICE} {time_z}')
+
                             time.sleep(time_z)
 
                         attempt += 1
@@ -155,12 +178,18 @@ def main_bot():
                     attempt = 1
                     while attempt <= int(number_of_tries):
 
+                        time_now = datetime.now()
+                        current_time = time_now.strftime(FORMAT_TIME3)
+
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
+                        status_sheet.update(f'I{str(row)}', f'{name_pk}')
+                        status_sheet.update(f'E{str(row)}', f'{ip}')
+                        status_sheet.update(f'F{str(row)}', f'{current_time}')
+
                         logs_col = logs_sheet.col_values(1)
                         last_element = logs_col[-1]
                         index_last_element = logs_col.index(last_element)
                         number_row = index_last_element + 2
-
-                        time_now = datetime.now()
 
                         logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
@@ -178,14 +207,23 @@ def main_bot():
                         select_input_usluga = driver.find_element(By.ID, ID_INPUT_USLUGA)
                         select_usluga = Select(select_input_usluga)
                         select_usluga.select_by_visible_text(str(usluga))
-                        time.sleep(random.randint(time_min, time_max))
+
+                        sec_first = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_first}')
+                        time.sleep(sec_first)
 
                         driver.find_element(By.ID, ID_BUTTON_ACEPTAR).click()
                         driver.implicitly_wait(80)
-                        time.sleep(random.randint(time_min, time_max))
+
+                        sec_second = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_second}')
+                        time.sleep(sec_second)
 
                         driver.find_element(By.ID, ID_BUTTON_ENTRAR).submit()
                         driver.implicitly_wait(80)
+
+                        sec_third = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WRITE} {name} {famila}')
 
                         driver.find_element(By.ID, ID_INPUT_NIE_TOMA).send_keys(nie)
                         driver.implicitly_wait(80)
@@ -197,12 +235,15 @@ def main_bot():
                         select_country = Select(select_input_country)
                         select_country.select_by_visible_text(country)
 
-                        time.sleep(random.randint(time_min, time_max))
+                        time.sleep(sec_third)
 
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
-                        time.sleep(random.randint(time_min, time_max))
+                        sec_fourth = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_fourth}')
+                        time.sleep(sec_fourth)
+
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
@@ -244,7 +285,11 @@ def main_bot():
                             logs_sheet.update(f'E{str(number_row)}', f'{name}')
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-                            time.sleep(900)
+
+                            sec_fivth = 900
+                            status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING_USER} {sec_fivth}')
+
+                            time.sleep(sec_fivth)
 
                         except:
                             time_finaly = datetime.now()
@@ -257,6 +302,8 @@ def main_bot():
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
 
+                            status_sheet.update(f'B{str(row)}', f'{STATUS_NO_OFFICE} {time_z}')
+
                             time.sleep(time_z)
 
                         attempt += 1
@@ -264,6 +311,8 @@ def main_bot():
 
                     attempt = 1
                     while attempt <= int(number_of_tries):
+
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
 
                         logs_col = logs_sheet.col_values(1)
                         last_element = logs_col[-1]
@@ -288,25 +337,37 @@ def main_bot():
                         select_input_usluga = driver.find_element(By.ID, ID_INPUT_USLUGA)
                         select_usluga = Select(select_input_usluga)
                         select_usluga.select_by_visible_text(str(usluga))
-                        time.sleep(random.randint(time_min, time_max))
+
+                        sec_first = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_first}')
+                        time.sleep(sec_first)
 
                         driver.find_element(By.ID, ID_BUTTON_ACEPTAR).click()
                         driver.implicitly_wait(80)
-                        time.sleep(random.randint(time_min, time_max))
+
+                        sec_second = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_second}')
+                        time.sleep(sec_second)
 
                         driver.find_element(By.ID, ID_BUTTON_ENTRAR).submit()
                         driver.implicitly_wait(80)
+
+                        sec_third = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WRITE} {name} {famila}')
 
                         driver.find_element(By.ID, ID_INPUT_NIE_CERT).send_keys(nie)
 
                         driver.find_element(By.ID, ID_INPUT_NOMBRE_CERT).send_keys(f'{name} {famila}')
 
-                        time.sleep(random.randint(time_min, time_max))
+                        time.sleep(sec_third)
 
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
-                        time.sleep(random.randint(time_min, time_max))
+                        sec_fourth = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_fourth}')
+                        time.sleep(sec_fourth)
+
                         driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
                         driver.implicitly_wait(5)
 
@@ -348,7 +409,11 @@ def main_bot():
                             logs_sheet.update(f'E{str(number_row)}', f'{name}')
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-                            time.sleep(900)
+
+                            sec_fivth = 900
+                            status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING_USER} {sec_fivth}')
+
+                            time.sleep(sec_fivth)
 
                         except:
                             time_finaly = datetime.now()
@@ -361,108 +426,138 @@ def main_bot():
                             logs_sheet.update(f'F{str(number_row)}', f'{famila}')
                             logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
 
+                            status_sheet.update(f'B{str(row)}', f'{STATUS_NO_OFFICE} {time_z}')
+
                             time.sleep(time_z)
 
                         attempt += 1
                 elif usluga == TarjetaUkranea:
 
-                    logs_col = logs_sheet.col_values(1)
-                    last_element = logs_col[-1]
-                    index_last_element = logs_col.index(last_element)
-                    number_row = index_last_element + 2
+                    attempt = 1
+                    while attempt <= int(number_of_tries):
 
-                    time_now = datetime.now()
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
+                        status_sheet.update(f'I{str(row)}', f'{name_pk}')
 
-                    logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
+                        logs_col = logs_sheet.col_values(1)
+                        last_element = logs_col[-1]
+                        index_last_element = logs_col.index(last_element)
+                        number_row = index_last_element + 2
 
-                    driver.get(MAIN_URL)
-                    driver.implicitly_wait(80)
+                        time_now = datetime.now()
 
-                    select_input_region = driver.find_element(By.ID, MAIN_SELECT)
-                    select_region = Select(select_input_region)
-                    select_region.select_by_visible_text(region)
-                    time.sleep(2)
+                        logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
-                    driver.find_element(By.ID, MAIN_PATH_BUTTON).click()
-                    driver.implicitly_wait(10)
+                        driver.get(MAIN_URL)
+                        driver.implicitly_wait(80)
 
-                    select_input_usluga = driver.find_element(By.ID, ID_INPUT_USLUGA)
-                    select_usluga = Select(select_input_usluga)
-                    select_usluga.select_by_visible_text(str(usluga))
-                    time.sleep(random.randint(time_min, time_max))
+                        select_input_region = driver.find_element(By.ID, MAIN_SELECT)
+                        select_region = Select(select_input_region)
+                        select_region.select_by_visible_text(region)
+                        time.sleep(2)
 
-                    driver.find_element(By.ID, ID_BUTTON_ACEPTAR).click()
-                    driver.implicitly_wait(80)
-                    time.sleep(random.randint(time_min, time_max))
+                        driver.find_element(By.ID, MAIN_PATH_BUTTON).click()
+                        driver.implicitly_wait(10)
 
-                    driver.find_element(By.ID, ID_BUTTON_ENTRAR).submit()
-                    driver.implicitly_wait(80)
+                        select_input_usluga = driver.find_element(By.ID, ID_INPUT_USLUGA)
+                        select_usluga = Select(select_input_usluga)
+                        select_usluga.select_by_visible_text(str(usluga))
 
-                    driver.find_element(By.ID, ID_INPUT_NIE_CERT).send_keys(nie)
+                        sec_first = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_first}')
+                        time.sleep(sec_first)
 
-                    driver.find_element(By.ID, ID_INPUT_NOMBRE_CERT).send_keys(f'{name} {famila}')
+                        driver.find_element(By.ID, ID_BUTTON_ACEPTAR).click()
+                        driver.implicitly_wait(80)
 
-                    time.sleep(random.randint(time_min, time_max))
+                        sec_second = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_second}')
+                        time.sleep(sec_second)
 
-                    driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
-                    driver.implicitly_wait(5)
+                        driver.find_element(By.ID, ID_BUTTON_ENTRAR).submit()
+                        driver.implicitly_wait(80)
 
-                    time.sleep(random.randint(time_min, time_max))
-                    driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
-                    driver.implicitly_wait(5)
+                        sec_third = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WRITE} {name} {famila}')
 
-                    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                        driver.find_element(By.ID, ID_INPUT_NIE_CERT).send_keys(nie)
 
-                    # выбор офиса
-                    try:
-                        driver.find_element(By.XPATH, LABEL_OFFICE)
+                        driver.find_element(By.ID, ID_INPUT_NOMBRE_CERT).send_keys(f'{name} {famila}')
+
+                        time.sleep(sec_third)
+
+                        driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
+                        driver.implicitly_wait(5)
+
+                        sec_fourth = random.randint(time_min, time_max)
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING} {sec_fourth}')
+                        time.sleep(sec_fourth)
+
+                        driver.find_element(By.ID, ID_BUTTON_ENVIAR).click()
+                        driver.implicitly_wait(5)
 
                         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-                        select_element4 = driver.find_element(By.XPATH, ID_INPUT_OFFICE)
-                        select_object4 = Select(select_element4)
+                        # выбор офиса
                         try:
-                            select_object4.select_by_index(1)
+                            driver.find_element(By.XPATH, LABEL_OFFICE)
+
+                            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+                            select_element4 = driver.find_element(By.XPATH, ID_INPUT_OFFICE)
+                            select_object4 = Select(select_element4)
+                            try:
+                                select_object4.select_by_index(1)
+                            except:
+                                select_object4.select_by_index(0)
+
+                            driver.find_element(By.XPATH, ID_BUTTON_OFFICE).click()
+
+                            driver.find_element(By.XPATH, ID_INPUT_TELEFONE).send_keys(telefone)
+
+                            driver.find_element(By.XPATH, ID_INPUT_EMAIL).send_keys(email)
+
+                            driver.find_element(By.XPATH, ID_INPUT_EMAIL_DOUBLE).send_keys(email)
+
+                            winsound.Beep(FREQUENCY, DURATION)
+                            time.sleep(1)
+                            winsound.Beep(FREQUENCY, DURATION)
+                            time.sleep(1)
+                            winsound.Beep(FREQUENCY, DURATION)
+                            time.sleep(1)
+                            time_finaly = datetime.now()
+                            current_time = time_finaly.strftime(FORMAT_TIME)
+
+                            logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
+                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
+                            logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
+                            logs_sheet.update(f'E{str(number_row)}', f'{name}')
+                            logs_sheet.update(f'F{str(number_row)}', f'{famila}')
+                            logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
+
+                            sec_fivth = 900
+                            status_sheet.update(f'B{str(row)}', f'{STATUS_WAITING_USER} {sec_fivth}')
+
+                            time.sleep(sec_fivth)
+
                         except:
-                            select_object4.select_by_index(0)
+                            time_finaly = datetime.now()
+                            current_time = time_finaly.strftime(FORMAT_TIME)
 
-                        driver.find_element(By.XPATH, ID_BUTTON_OFFICE).click()
+                            logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
+                            logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_2}')
+                            logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
+                            logs_sheet.update(f'E{str(number_row)}', f'{name}')
+                            logs_sheet.update(f'F{str(number_row)}', f'{famila}')
+                            logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
 
-                        driver.find_element(By.XPATH, ID_INPUT_TELEFONE).send_keys(telefone)
+                            status_sheet.update(f'B{str(row)}', f'{STATUS_NO_OFFICE} {time_z}')
 
-                        driver.find_element(By.XPATH, ID_INPUT_EMAIL).send_keys(email)
+                            time.sleep(time_z)
 
-                        driver.find_element(By.XPATH, ID_INPUT_EMAIL_DOUBLE).send_keys(email)
+                        attempt += 1
 
-                        winsound.Beep(FREQUENCY, DURATION)
-                        time.sleep(1)
-                        winsound.Beep(FREQUENCY, DURATION)
-                        time.sleep(1)
-                        winsound.Beep(FREQUENCY, DURATION)
-                        time.sleep(1)
-                        time_finaly = datetime.now()
-                        current_time = time_finaly.strftime(FORMAT_TIME)
 
-                        logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                        logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_3}')
-                        logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                        logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                        logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                        logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-                        time.sleep(900)
-
-                    except:
-                        time_finaly = datetime.now()
-                        current_time = time_finaly.strftime(FORMAT_TIME)
-
-                        logs_sheet.update(f'B{str(number_row)}', f'{current_time}')
-                        logs_sheet.update(f'C{str(number_row)}', f'{TEXT_LOGS_2}')
-                        logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
-                        logs_sheet.update(f'E{str(number_row)}', f'{name}')
-                        logs_sheet.update(f'F{str(number_row)}', f'{famila}')
-                        logs_sheet.update(f'G{str(number_row)}', f'{usluga}')
-
-                        time.sleep(time_z)
 
         except Exception as problem:
 
@@ -483,12 +578,13 @@ def main_bot():
             logs_sheet.update(f'D{str(number_row)}', f'{name_robot_active}')
             logs_sheet.update(f'E{str(number_row)}', f'-')
             logs_sheet.update(f'F{str(number_row)}', f'-')
-            logs_sheet.update(f'G{str(number_row)}', f'{problem}')
+            logs_sheet.update(f'G{str(number_row)}', f'-')
+            logs_sheet.update(f'H{str(number_row)}', f'{problem}')
 
-            status_sheet.update(f'B{str(row_for_stop)}', f'{STATUS_FREE}')
+            sec_stop = 300
+            status_sheet.update(f'B{str(row_for_stop)}', f'{STATUS_TOO_MANY_REQUEST} {sec_stop}')
 
-            driver.quit()
-            sys.exit(0)
+            time.sleep(sec_stop)
 
 
 if __name__ == '__main__':

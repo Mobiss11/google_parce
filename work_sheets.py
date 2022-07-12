@@ -1,3 +1,5 @@
+import socket
+
 import gspread
 
 from credentials import credentials, table, settingsSheet, statusSheet, logsSheet
@@ -13,9 +15,12 @@ get_names = status_sheet.col_values(1)
 nums_robots = len(get_names)
 nums_rows = nums_robots + 1
 
+
 names_robots = []
 tables_robot = []
 rows = []
+emails = []
+phones = []
 
 for num_row in range(2, nums_rows):
     get_status = status_sheet.row_values(num_row)
@@ -24,6 +29,11 @@ for num_row in range(2, nums_rows):
     if status == STATUS_FREE:
         name_robot = get_status[0]
         name_table = get_status[2]
+        email = get_status[9]
+        telephone = get_status[10]
+
+        emails.append(email)
+        phones.append(telephone)
         tables_robot.append(name_table)
         names_robots.append(name_robot)
         rows.append(num_row)
@@ -31,6 +41,8 @@ for num_row in range(2, nums_rows):
 list_active = tables_robot[0]
 row = rows[0]
 row_for_stop = row
+email_manager = emails[0]
+phone_manager = phones[0]
 
 status_sheet.update(f'B{str(row)}', f'{STATUS_WORK}')
 

@@ -7,11 +7,19 @@ OPTION_3 = "--incognito"
 NAME_DRIVER = "chromedriver"
 
 STATUS_FREE = 'Standing by'
-STATUS_WORK = 'Working'
+STATUS_WORK = 'FILL'
+STATUS_WAITING = 'Wait seconds'
+STATUS_WRITE = 'Write data'
+STATUS_WAITING_USER = 'Wait user actions seconds'
+STATUS_TOO_MANY_REQUEST = 'Too many request wait seconds'
+STATUS_NO_OFFICE = 'No oficce wait seconds'
+
 TEXT_LOGS_1 = "Cитов не найдено"
 TEXT_LOGS_2 = "Офисов не найдено"
 TEXT_LOGS_3 = "Офис найден, перейдите к сите"
 FORMAT_TIME = "%d-%m-%Y %H:%M"
+FORMAT_TIME3 = "%d-%m-%Y %H:%M:%S"
+FORMAT_TIME2 = "%H:%M:%S"
 
 SCROLL_PAUSE_TIME = 0.2
 
@@ -62,4 +70,5 @@ ID_BUTTON_SIGUIENTE = 'btnSiguiente'
 ID_CITA = 'cita_1'
 
 # gui
-COMMAND = 'Stop'
+COMMAND = 'FALSE'
+NAME_FILE = "main.exe"
