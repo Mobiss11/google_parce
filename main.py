@@ -48,14 +48,20 @@ def main_bot():
                     attempt = 1
                     while attempt <= int(number_of_tries):
 
+                        time_now = datetime.now()
+                        current_time = time_now.strftime(FORMAT_TIME3)
+
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
+                        status_sheet.update(f'I{str(row)}', f'{name_pk}')
+                        status_sheet.update(f'E{str(row)}', f'{ip}')
+                        status_sheet.update(f'F{str(row)}', f'{current_time}')
+
                         status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
 
                         logs_col = logs_sheet.col_values(1)
                         last_element = logs_col[-1]
                         index_last_element = logs_col.index(last_element)
                         number_row = index_last_element + 2
-
-                        time_now = datetime.now()
 
                         logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
@@ -312,14 +318,20 @@ def main_bot():
                     attempt = 1
                     while attempt <= int(number_of_tries):
 
+                        time_now = datetime.now()
+                        current_time = time_now.strftime(FORMAT_TIME3)
+
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
+                        status_sheet.update(f'I{str(row)}', f'{name_pk}')
+                        status_sheet.update(f'E{str(row)}', f'{ip}')
+                        status_sheet.update(f'F{str(row)}', f'{current_time}')
+
                         status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
 
                         logs_col = logs_sheet.col_values(1)
                         last_element = logs_col[-1]
                         index_last_element = logs_col.index(last_element)
                         number_row = index_last_element + 2
-
-                        time_now = datetime.now()
 
                         logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
@@ -436,15 +448,20 @@ def main_bot():
                     attempt = 1
                     while attempt <= int(number_of_tries):
 
+                        time_now = datetime.now()
+                        current_time = time_now.strftime(FORMAT_TIME3)
+
                         status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
                         status_sheet.update(f'I{str(row)}', f'{name_pk}')
+                        status_sheet.update(f'E{str(row)}', f'{ip}')
+                        status_sheet.update(f'F{str(row)}', f'{current_time}')
+
+                        status_sheet.update(f'B{str(row)}', f'{STATUS_WORK} {name} {famila}')
 
                         logs_col = logs_sheet.col_values(1)
                         last_element = logs_col[-1]
                         index_last_element = logs_col.index(last_element)
                         number_row = index_last_element + 2
-
-                        time_now = datetime.now()
 
                         logs_sheet.update(f'A{str(number_row)}', f'{time_now}')
 
@@ -556,8 +573,6 @@ def main_bot():
                             time.sleep(time_z)
 
                         attempt += 1
-
-
 
         except Exception as problem:
 
