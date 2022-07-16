@@ -7,7 +7,7 @@ OPTION_3 = "--incognito"
 NAME_DRIVER = "chromedriver"
 
 STATUS_FREE = 'Standing by'
-STATUS_WORK = 'FILL'
+STATUS_WORK = 'Working'
 STATUS_WAITING = 'Wait seconds'
 STATUS_WRITE = 'Write data'
 STATUS_WAITING_USER = 'Wait user actions seconds'

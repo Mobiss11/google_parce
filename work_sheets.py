@@ -1,9 +1,9 @@
 import socket
-
+from datetime import datetime
 import gspread
 
 from credentials import credentials, table, settingsSheet, statusSheet, logsSheet
-from consts import STATUS_FREE, STATUS_WORK
+from consts import STATUS_FREE, STATUS_WORK, FORMAT_TIME3
 
 connect_json = gspread.service_account_from_dict(credentials)
 
@@ -44,6 +44,14 @@ row_for_stop = row
 email_manager = emails[0]
 phone_manager = phones[0]
 
+time_now = datetime.now()
+name_pk = socket.gethostname()
+ip = socket.gethostbyname(socket.gethostname())
+current_time = time_now.strftime(FORMAT_TIME3)
+
+status_sheet.update(f'I{str(row_for_stop)}', f'{name_pk}')
+status_sheet.update(f'E{str(row_for_stop)}', f'{ip}')
+status_sheet.update(f'F{str(row_for_stop)}', f'{current_time}')
 status_sheet.update(f'B{str(row)}', f'{STATUS_WORK}')
 
 robots_list = sheet_google.worksheet(list_active)
